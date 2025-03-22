@@ -258,9 +258,6 @@
             border: 2px solid black;
         }
        
-        .table {
-         width: 60%;
-            }
         th, td {
             border: 1px solid black;
             padding: 10px;
@@ -277,6 +274,17 @@
             margin-left: 25%;
             margin-right: 25%;
         }
+        @media screen and (max-width: 768px) {
+    .table-wrapper {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    table {
+        width: auto;
+        min-width: 100%;
+    }
+}
     </style>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -372,7 +380,8 @@
             <br><b>Final certificate:</b> School-leaving certificate
             </p>
         <h3>Curriculum</h3>
-        <table class="table">
+       <div class="table-wrapper">
+            <table <div class="table">
             <tr>
                 <th>Year</th>
                 <th>1st</th><th>2nd</th><th>3rd</th><th>4th</th>
@@ -398,6 +407,7 @@
             <tr><td>Elective Subject 4</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>2</td></tr>
             <tr><td>Total Weekly Hours</td><td>30</td><td>29</td><td>31</td><td>32</td><td>34</td><td>34</td><td>34</td><td>30</td></tr>
         </table>
+           </div>
         <p><strong>Notes:</strong></p>
         <p>1) The class is split into two groups for one lesson.<br>
            2) The class is split into two groups for all lessons.<br>
