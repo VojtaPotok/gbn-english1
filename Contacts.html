@@ -14,15 +14,20 @@
             padding: 0;
             overflow-x: hidden;
         }
-         html, body {
-
+        html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;  /* Zajistíme, že stránka nebude posunuta horizontálně */
     width: 100%;
-}   header h1 {
-    font-size: clamp(20px, 4vw, 40px); 
-    margin: 0 auto; 
+    height: 100%; /* Aby stránka nevyčnívala */
+}
+        h1 {
+    font-size: clamp(20px, 4vw, 40px);
+    margin: 0;
     text-align: center;
     white-space: nowrap;
     padding: 10px 0;
+    flex-grow: 1;
 }
         @media screen and (max-width: 500px) {
     header h1 {
@@ -36,30 +41,28 @@
     padding: 10px 15px;
     display: flex;
     align-items: center;
-    justify-content: space-between; /* Rozděluje prostor mezi logo a vlajku */
-    position: relative;
-    width: 100%;
-    top: 0;
+    justify-content: center;
+    position: sticky;  /* Toto zajišťuje, že header se přilepí na vrch při scrollování */
+    top: 0;  /* Tento parametr říká, že se přilepí k vrchu */
     left: 0;
+    width: 100%;
     z-index: 1000;
     transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
 }
        .flag {
+    position: absolute;  /* Vlajka bude na pravé straně */
+    right: 3%;  /* Můžete upravit podle potřeby */
     height: 25px;
     width: auto;
-    position: relative; /* Změněno na relative, aby se vlajka neovlivňovala s absolutní pozicí */
-    margin-left: auto; /* Umožňuje, že vlajka je vždy na pravé straně */
-}
-        .logo {
-    position: relative; /* Změněno na relative, aby se logo pohybovalo s flexboxem */
+}       .logo {
+    position: absolute;  /* Logo bude na levé straně */
+    left: 3%;  /* Můžete upravit podle potřeby */
     width: auto;
     height: 60px;
     border-radius: 50%;
     object-fit: cover;
     background: none;
-    flex-shrink: 0; /* Zajišťuje, že logo se nebude zmenšovat */
 }
-
         .logo img {
             height: 60px;
             max-height: 100px;
