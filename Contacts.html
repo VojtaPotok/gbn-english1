@@ -14,7 +14,21 @@
             padding: 0;
             overflow-x: hidden;
         }
-
+         html, body {
+    overflow-x: hidden;
+    width: 100%;
+}   header h1 {
+    font-size: clamp(20px, 4vw, 40px); 
+    margin: 0 auto; 
+    text-align: center;
+    white-space: nowrap;
+    padding: 10px 0;
+}
+        @media screen and (max-width: 500px) {
+    header h1 {
+        padding: 15px 0; 
+    }
+}
         header {
             background: #6d4c41;
             color: white;
@@ -301,7 +315,7 @@
         <p>
             <strong>Name:</strong> Gymnázium Benešov<br>
             <strong>Address:</strong> Husova 470, 256 01 Benešov<br>
-            <strong>Phone:</strong> 311 444 611, 311 444 612<br>
+            <strong>Phone:</strong> 311 444 611, 311 444 612 (+420)<br>
             <strong>E-mail:</strong> <a href="mailto:gymnazium@gbn.cz">gymnazium@gbn.cz</a><br>
             <strong>Data Box:</strong> 3bmx7xh<br>
             <strong>Account Number:</strong> 475260287/0100<br>
@@ -338,7 +352,7 @@
         </ul>
         
         <h2>Prevention Methodologist</h2>
-        <ul>
+        <ul class="list">
           <li>  <strong>Mgr. Alena Marešovská</strong><br>
             <strong>Email:</strong> <a href="mailto:maresovska_alena@gbn.cz">maresovska_alena@gbn.cz</a><br>
             <strong>Phone:</strong> +420 311 444 631
