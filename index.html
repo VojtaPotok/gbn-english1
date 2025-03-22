@@ -315,22 +315,22 @@
             <img src="budova.jpg">
             
         </div>
-        <div class="container">
-            <div class="sections">
-                <div class="section">
-                    <h2>Feelings of graduates</h2>
-                    <p>Short stories about our school.(<a href="FurtherInformation.html">Link</a>)</p>
-                </div>
-                <div class="section">
-                    <h2>Interesting past</h2>
-                    <p>History and notable alumni.(<a href="History.html">Link</a>)</p>
-                </div>
-                <div class="section">
-                    <h2>International programs</h2>
-                    <p>Partner schools and exchange program.(<a href="InternationalPrograms.html">Link</a>)</p>
-                </div>
-            </div>
+       <div class="container">
+    <div class="sections">
+        <div class="section" data-url="FurtherInformation.html">
+            <h2>Feelings of graduates</h2>
+            <p>Short stories about our school.</p>
         </div>
+        <div class="section" data-url="History.html">
+            <h2>Interesting past</h2>
+            <p>History and notable alumni.</p>
+        </div>
+        <div class="section" data-url="InternationalPrograms.html">
+            <h2>International programs</h2>
+            <p>Partner schools and exchange program.</p>
+        </div>
+    </div>
+</div>
     
         <h2>Basic information</h2>
         <p>
@@ -417,6 +417,12 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
+
+            document.querySelectorAll('.section').forEach(section => {
+        section.addEventListener('click', function() {
+            window.location.href = this.getAttribute('data-url');
+        });
+    });
         </script>
     </body>
 </html>
