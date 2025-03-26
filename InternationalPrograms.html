@@ -72,9 +72,6 @@
             justify-content: space-between;
             z-index: 999;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            
-           
-        
 
         }
         .hidden {
@@ -124,32 +121,6 @@
             color: white;
             text-decoration: none;
             padding: 10px 20px;
-        }
-        .search-container {
-            display: flex;
-            align-items: center;
-            margin-left: auto;
-        }
-        .search-container input {
-            padding: 8px;
-            width: 200px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-        .search-button {
-            background: none;
-            border: none;
-            cursor: pointer;
-            margin-left: 5px;
-        }
-        .search-button img {
-            
-            margin-right: 20px;
-            width: 24px;
-            height: 24px;
-            object-fit: cover;
-            background: none;
         }
         .sections {
             display: flex;
@@ -201,17 +172,8 @@
             margin-left: 10%;
             margin-right: 10%;
         }
-        #search {
-            display: none; 
-            padding: 8px;
-            width: 200px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 16px;
-            outline: none;
-        }.search-container.active #search {
-            display: inline-block; 
-        }
+       
+        
         .content {
             padding-top: 20px; 
         }
@@ -295,12 +257,7 @@
             <li><a href="Contacts.html">Contacts</a></li>
         </ul>
         
-        <div class="search-container">
-        <input type="text" id="search" placeholder="Hledat..." onkeyup="searchFunction()">
-        <button class="search-button">
-            <img src="searchicon.png" alt="Hledat">
-         </button>
-        </div>
+        
     </nav>
 
         <hr>
@@ -320,8 +277,9 @@
     
         <h2>Exchange Program</h2>
             <h3>Information</h3>
-            <p>An exchange program is an educational initiative that allows students to temporarily study at or visit a partner school abroad. During this program, students have the opportunity to improve their language skills, experience a new culture, gain international experience, and build new friendships. Accommodation is provided in host families, giving students insight into everyday life in the host country. Participants must be prepared to offer accommodation and care for visiting students from the same partner school (i.e., to provide a similar program to what they received from foreign students). The duration of the exchange program is usually one or more weeks. An exchange program is an excellent opportunity for personal and academic development and can be an important step toward future study and career opportunities.
+            <p>The exchange program with the Danish town of Aabenraa has a long tradition, and in recent years, we have been organizing it annually. All students who have participated consistently give very positive feedback, appreciating the opportunity to improve their foreign language skills, introduce our country and school to the Danish students, get to know Danish customs and traditions as well as explain the Czech ones, experience being a student at a different institution for a few days, become part of another family for a short time, visit interesting places, museums, and national parks, taste different dishes, learn to dance a traditional dance, and much more.
             </p>
+<p>The program is based on a reciprocal visit of students, lasting 4 to 5 days in each country. The primary language of communication is usually English, but students also have the chance to practice German. </p>
 
 
 
@@ -353,30 +311,7 @@
             </p>
         </footer>
         <script> 
-        document.addEventListener("DOMContentLoaded", function () {
-    let searchContainer = document.querySelector(".search-container");
-    let searchButton = document.querySelector(".search-button");
-    let searchInput = document.getElementById("search");
-
-    searchButton.addEventListener("click", function (event) {
-        event.stopPropagation(); 
-        searchContainer.classList.toggle("active");
-        searchInput.focus();
-    });
-
-    document.addEventListener("click", function (event) {
-        if (!searchContainer.contains(event.target) && event.target !== searchButton) {
-            searchContainer.classList.remove("active");
-        }
-    });
-
-    searchInput.addEventListener("keydown", function (event) {
-        if (event.key === "Enter") {
-            event.preventDefault();
-            searchFunction();
-        }
-    });
-});
+      
 document.addEventListener("DOMContentLoaded", function () {
     const navLinks = document.querySelector(".nav-links");
     const menuToggle = document.querySelector(".menu-toggle");
@@ -384,11 +319,13 @@ document.addEventListener("DOMContentLoaded", function () {
     const currentUrl = window.location.pathname.split("/").pop();
 
     
-    links.forEach(link => {
-        if (link.getAttribute("href") === currentUrl) {
-            link.classList.add("active");
-        }
-    });
+   const currentUrl = window.location.href;
+
+links.forEach(link => {
+    if (currentUrl.includes(link.getAttribute("href"))) {
+        link.classList.add("active");
+    }
+});
 
    
     function toggleMenu() {
