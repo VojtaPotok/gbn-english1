@@ -78,19 +78,22 @@
             transform: translateY(-100%);
             opacity: 0;
         }
-        .nav-links {
-            list-style: none;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            right: 20px;
-            left: 15px;
+ .nav-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
         }
 
         .nav-links li {
             display: inline;
         }
+        .nav-links li:last-child {
+    margin-right: 30px;
+}
+
 
         .nav-links a {
             text-decoration: none;
@@ -102,11 +105,13 @@
             transition: all 0.3s;
             border-radius: 5px;
         }
-        .nav-links a.active {
-            background: #5d4037; 
-            color:white;
-            font-weight: bold;
-        }
+      .nav-links a.active {
+    background: #5d4037;
+    color: white;
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 5px;
+}
         .nav-links a:hover {
             background: #5d4037;
             transform: scale(1.1);
@@ -317,11 +322,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const navLinks = document.querySelector(".nav-links");
     const menuToggle = document.querySelector(".menu-toggle");
     const links = document.querySelectorAll(".nav-links a");
-    const currentUrl = window.location.pathname.split("/").pop(); // Pouze název stránky
-
+    const currentUrl = window.location.pathname.split("/").pop().toLowerCase(); // Převod na malá písmena
 
     links.forEach(link => {
-        if (link.getAttribute("href") === currentUrl || (link.getAttribute("href") === "index.html" && currentUrl === "")) {
+        const linkHref = link.getAttribute("href").toLowerCase(); // Sjednocení malých písmen
+        if (linkHref === currentUrl || (linkHref === "index.html" && (currentUrl === "" || currentUrl === "index.html"))) {
             link.classList.add("active");
         } else {
             link.classList.remove("active");
@@ -332,7 +337,6 @@ document.addEventListener("DOMContentLoaded", function () {
         navLinks.classList.toggle("active");
     }
 
-
     if (menuToggle) {
         menuToggle.addEventListener("click", function (event) {
             toggleMenu();
@@ -340,7 +344,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
- 
     document.addEventListener("click", function (event) {
         if (navLinks && !navLinks.contains(event.target) && !menuToggle.contains(event.target)) {
             navLinks.classList.remove("active");
