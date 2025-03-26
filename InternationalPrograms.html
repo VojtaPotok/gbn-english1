@@ -316,30 +316,35 @@ document.addEventListener("DOMContentLoaded", function () {
     const navLinks = document.querySelector(".nav-links");
     const menuToggle = document.querySelector(".menu-toggle");
     const links = document.querySelectorAll(".nav-links a");
-    const currentUrl = window.location.pathname.split("/").pop();
+    const currentUrl = window.location.href;
 
-    
-   const currentUrl = window.location.href;
+    // Debugging
+    console.log("Menu Toggle:", menuToggle);
+    console.log("Nav Links:", navLinks);
 
-links.forEach(link => {
-    if (currentUrl.includes(link.getAttribute("href"))) {
-        link.classList.add("active");
-    }
-});
+    // Zvýraznění aktivního odkazu
+    links.forEach(link => {
+        if (currentUrl.includes(link.getAttribute("href"))) {
+            link.classList.add("active");
+        }
+    });
 
-   
+    // Funkce pro otevření/zavření menu
     function toggleMenu() {
         navLinks.classList.toggle("active");
     }
 
-    menuToggle.addEventListener("click", function (event) {
-        toggleMenu();
-        event.stopPropagation(); 
-    });
+    // Kliknutí na menu toggle
+    if (menuToggle) {
+        menuToggle.addEventListener("click", function (event) {
+            toggleMenu();
+            event.stopPropagation();
+        });
+    }
 
-  
+    // Zavření menu při kliknutí mimo
     document.addEventListener("click", function (event) {
-        if (!navLinks.contains(event.target) && !menuToggle.contains(event.target)) {
+        if (navLinks && !navLinks.contains(event.target) && !menuToggle.contains(event.target)) {
             navLinks.classList.remove("active");
         }
     });
