@@ -84,6 +84,8 @@
             display: flex;
             justify-content: center;
             gap: 15px;
+            right: 15px;
+            left: 15px;
         }
 
         .nav-links li {
@@ -311,30 +313,26 @@
             </p>
         </footer>
         <script> 
-      
 document.addEventListener("DOMContentLoaded", function () {
     const navLinks = document.querySelector(".nav-links");
     const menuToggle = document.querySelector(".menu-toggle");
     const links = document.querySelectorAll(".nav-links a");
-    const currentUrl = window.location.href;
+    const currentUrl = window.location.pathname.split("/").pop(); // Pouze název stránky
 
-    // Debugging
-    console.log("Menu Toggle:", menuToggle);
-    console.log("Nav Links:", navLinks);
 
-    // Zvýraznění aktivního odkazu
     links.forEach(link => {
-        if (currentUrl.includes(link.getAttribute("href"))) {
+        if (link.getAttribute("href") === currentUrl || (link.getAttribute("href") === "index.html" && currentUrl === "")) {
             link.classList.add("active");
+        } else {
+            link.classList.remove("active");
         }
     });
 
-    // Funkce pro otevření/zavření menu
     function toggleMenu() {
         navLinks.classList.toggle("active");
     }
 
-    // Kliknutí na menu toggle
+
     if (menuToggle) {
         menuToggle.addEventListener("click", function (event) {
             toggleMenu();
@@ -342,7 +340,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Zavření menu při kliknutí mimo
+ 
     document.addEventListener("click", function (event) {
         if (navLinks && !navLinks.contains(event.target) && !menuToggle.contains(event.target)) {
             navLinks.classList.remove("active");
