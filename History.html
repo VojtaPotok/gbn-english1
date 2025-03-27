@@ -15,20 +15,21 @@
             overflow-x: hidden;
         }
          html, body {
-    overflow-x: hidden;
-    width: 100%;
-}   header h1 {
-    font-size: clamp(20px, 4vw, 40px); 
-    margin: 0 auto; 
-    text-align: center;
-    white-space: nowrap;
-    padding: 10px 0;
-}
+            overflow-x: hidden;
+            width: 100%;
+        }   
+        header h1 {
+            font-size: clamp(20px, 4vw, 40px); 
+            margin: 0 auto; 
+            text-align: center;
+            white-space: nowrap;
+            padding: 10px 0;
+        }
         @media screen and (max-width: 500px) {
-    header h1 {
-        padding: 15px 0; 
-    }
-}
+            header h1 {
+                padding: 15px 0; 
+            }
+        }
         header {
             background: #6d4c41;
             color: white;
@@ -72,9 +73,6 @@
             justify-content: space-between;
             z-index: 999;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            
-           
-        
 
         }
         .hidden {
@@ -83,7 +81,7 @@
         }
         .nav-links {
             list-style: none;
-            padding: 0;
+            padding: 0 20px 0 10px;
             display: flex;
             justify-content: center;
             gap: 15px;
@@ -125,59 +123,7 @@
             text-decoration: none;
             padding: 10px 20px;
         }
-        .search-container {
-            display: flex;
-            align-items: center;
-            margin-left: auto;
-        }
-        .search-container input {
-            padding: 8px;
-            width: 200px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-        .search-button {
-            background: none;
-            border: none;
-            cursor: pointer;
-            margin-left: 5px;
-        }
-        .search-button img {
-            
-            margin-right: 20px;
-            width: 24px;
-            height: 24px;
-            object-fit: cover;
-            background: none;
-        }
-        #search-results {
-            position: absolute;
-            top: 45px;
-            right: 0;
-            width: 220px; 
-            background: white;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            display: none;
-            max-height: 200px;
-            overflow-y: auto;
-            z-index: 1000;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        #search-results a {
-            display: block;
-            padding: 10px;
-            text-decoration: none;
-            color: black;
-            font-size: 14px;
-            border-bottom: 1px solid #ddd;
-        }
-
-        #search-results a:hover {
-            background: #f4f4f4;
-        }
+       
         .sections {
             display: flex;
             justify-content: space-between;
@@ -232,18 +178,7 @@
         .footer2 p, hr {
             font-size: 75%;
         }
-        #search {
-            display: none; 
-            padding: 8px;
-            width: 200px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 16px;
-            outline: none;
-        }
-        .search-container.active #search {
-            display: inline-block; 
-        }
+      
         .content {
             padding-top: 20px; 
         }
@@ -445,127 +380,38 @@
         </p>
     </footer>
         <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                let searchContainer = document.querySelector(".search-container");
-                let searchButton = document.querySelector(".search-button");
-                let searchInput = document.getElementById("search");
-                let searchResults = document.getElementById("search-results");
-            
-                searchButton.addEventListener("click", function (event) {
-                    event.stopPropagation(); 
-                    searchContainer.classList.toggle("active");
-                    searchInput.focus();
-                });
-            
-                document.addEventListener("click", function (event) {
-                    if (!searchContainer.contains(event.target) && event.target !== searchButton) {
-                        searchContainer.classList.remove("active");
-                        searchResults.style.display = "none";
-                    }
-                });
-            
-                searchInput.addEventListener("keydown", function (event) {
-                    if (event.key === "Enter") {
-                        event.preventDefault();
-                        searchFunction();
-                    }
-                });
-            });
-            
-            async function searchFunction() {
-                let input = document.getElementById("search").value.toLowerCase();
-                let resultsContainer = document.getElementById("search-results");
-            
-                let pages = [
-                { name: "Home", url: "Index.html" },
-                { name: "Competitions", url: "CompetitionsAndActivities.html" },
-                { name: "History", url: "History.html" },
-                { name: "Further Information", url: "FurtherInformation.html" },
-                { name: "Excursions", url: "ExcursionsAndCourses.html" },
-                { name: "International Programs", url: "InternationalPrograms.html" },
-                { name: "Programs & Subjects", url: "ProgramsAndSubjects.html" },
-                { name: "Admission", url: "AdmissionProcess.html" },
-                { name: "Contacts", url: "Contacts.html" }
-                ];
-            
-                resultsContainer.innerHTML = "";
-                if (input === "") {
-                    resultsContainer.style.display = "none";
-                    return;
-                }
-            
-                let matches = [];
-            
-                for (let page of pages) {
-                    let response = await fetch(page.url);
-                    let text = await response.text();
-                    
-                    let parser = new DOMParser();
-                    let doc = parser.parseFromString(text, "text/html");
-                    let bodyText = doc.body.innerText.toLowerCase();
-            
-                    let index = bodyText.indexOf(input);
-                    if (index !== -1) {
-                        let snippet = doc.body.innerText.substring(index - 30, index + 30);
-                        matches.push({ name: page.name, url: `${page.url}?search=${encodeURIComponent(input)}`, snippet });
-                    }
-                }
-            
-                if (matches.length > 0) {
-                    resultsContainer.style.display = "block";
-                    matches.forEach(match => {
-                        let link = document.createElement("a");
-                        link.href = match.url;
-                        link.innerHTML = `<strong>${match.name}</strong>: ...${match.snippet}...`;
-                        resultsContainer.appendChild(link);
-                        resultsContainer.appendChild(document.createElement("br"));
-                    });
-                } else {
-                    resultsContainer.style.display = "none";
-                }
-            }
-            
-           
-            function highlightSearchTerm() {
-                const params = new URLSearchParams(window.location.search);
-                const searchTerm = params.get("search");
-            
-                if (searchTerm) {
-                    let bodyText = document.body.innerHTML;
-                    let highlighted = bodyText.replace(new RegExp(searchTerm, "gi"), match => `<span style="background-color: yellow;">${match}</span>`);
-                    document.body.innerHTML = highlighted;
-                }
-            }
-            
-            window.onload = highlightSearchTerm;
-            document.addEventListener("DOMContentLoaded", function () {
+         document.addEventListener("DOMContentLoaded", function () {
     const navLinks = document.querySelector(".nav-links");
     const menuToggle = document.querySelector(".menu-toggle");
     const links = document.querySelectorAll(".nav-links a");
-    const currentUrl = window.location.pathname.split("/").pop();
+    const currentUrl = window.location.pathname.split("/").pop().toLowerCase(); 
 
-    
+
     links.forEach(link => {
-        if (link.getAttribute("href") === currentUrl) {
+        if (link.href.split("/").pop().toLowerCase() === currentUrl) {
             link.classList.add("active");
         }
     });
 
-   
     function toggleMenu() {
         navLinks.classList.toggle("active");
     }
 
     menuToggle.addEventListener("click", function (event) {
         toggleMenu();
-        event.stopPropagation(); 
+        event.stopPropagation();
     });
 
-  
     document.addEventListener("click", function (event) {
         if (!navLinks.contains(event.target) && !menuToggle.contains(event.target)) {
             navLinks.classList.remove("active");
         }
+    });
+
+    document.querySelectorAll('.section').forEach(section => {
+        section.addEventListener('click', function () {
+            window.location.href = this.getAttribute('data-url');
+        });
     });
 });
         </script>
