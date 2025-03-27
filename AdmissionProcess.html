@@ -15,20 +15,21 @@
             overflow-x: hidden;
         }
          html, body {
-    overflow-x: hidden;
-    width: 100%;
-}   header h1 {
-    font-size: clamp(20px, 4vw, 40px); 
-    margin: 0 auto; 
-    text-align: center;
-    white-space: nowrap;
-    padding: 10px 0;
-}
+            overflow-x: hidden;
+            width: 100%;
+        }   
+        header h1 {
+            font-size: clamp(20px, 4vw, 40px); 
+            margin: 0 auto; 
+            text-align: center;
+            white-space: nowrap;
+            padding: 10px 0;
+        }
         @media screen and (max-width: 500px) {
-    header h1 {
-        padding: 15px 0; 
-    }
-}
+            header h1 {
+                padding: 15px 0; 
+            }
+        }
         header {
             background: #6d4c41;
             color: white;
@@ -80,7 +81,7 @@
         }
         .nav-links {
             list-style: none;
-            padding: 0;
+            padding: 0 20px 10px;
             display: flex;
             justify-content: center;
             gap: 15px;
@@ -122,32 +123,7 @@
             text-decoration: none;
             padding: 10px 20px;
         }
-        .search-container {
-            display: flex;
-            align-items: center;
-            margin-left: auto;
-        }
-        .search-container input {
-            padding: 8px;
-            width: 200px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-        .search-button {
-            background: none;
-            border: none;
-            cursor: pointer;
-            margin-left: 5px;
-        }
-        .search-button img {
-            
-            margin-right: 20px;
-            width: 24px;
-            height: 24px;
-            object-fit: cover;
-            background: none;
-        }
+        
         .sections {
             display: flex;
             justify-content: space-between;
@@ -194,17 +170,7 @@
             margin-left: 10%;
             margin-right: 10%;
         }
-        #search {
-            display: none; 
-            padding: 8px;
-            width: 200px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 16px;
-            outline: none;
-        }.search-container.active #search {
-            display: inline-block; 
-        }
+   
         .content {
             padding-top: 20px; 
         }
@@ -289,12 +255,7 @@
             <li><a href="Contacts.html">Contacts</a></li>
         </ul>
         
-        <div class="search-container">
-        <input type="text" id="search" placeholder="Hledat..." onkeyup="searchFunction()">
-        <button class="search-button">
-            <img src="searchicon.png" alt="Hledat">
-         </button>
-        </div>
+       
     </nav>
 
         <hr>
@@ -339,58 +300,38 @@
         </p>
     </footer>
         <script> 
-        document.addEventListener("DOMContentLoaded", function () {
-    let searchContainer = document.querySelector(".search-container");
-    let searchButton = document.querySelector(".search-button");
-    let searchInput = document.getElementById("search");
-
-    searchButton.addEventListener("click", function (event) {
-        event.stopPropagation(); 
-        searchContainer.classList.toggle("active");
-        searchInput.focus();
-    });
-
-    document.addEventListener("click", function (event) {
-        if (!searchContainer.contains(event.target) && event.target !== searchButton) {
-            searchContainer.classList.remove("active");
-        }
-    });
-
-    searchInput.addEventListener("keydown", function (event) {
-        if (event.key === "Enter") {
-            event.preventDefault();
-            searchFunction();
-        }
-    });
-});
-document.addEventListener("DOMContentLoaded", function () {
+      document.addEventListener("DOMContentLoaded", function () {
     const navLinks = document.querySelector(".nav-links");
     const menuToggle = document.querySelector(".menu-toggle");
     const links = document.querySelectorAll(".nav-links a");
-    const currentUrl = window.location.pathname.split("/").pop();
+    const currentUrl = window.location.pathname.split("/").pop().toLowerCase(); 
 
-    
+
     links.forEach(link => {
-        if (link.getAttribute("href") === currentUrl) {
+        if (link.href.split("/").pop().toLowerCase() === currentUrl) {
             link.classList.add("active");
         }
     });
 
-   
     function toggleMenu() {
         navLinks.classList.toggle("active");
     }
 
     menuToggle.addEventListener("click", function (event) {
         toggleMenu();
-        event.stopPropagation(); 
+        event.stopPropagation();
     });
 
-  
     document.addEventListener("click", function (event) {
         if (!navLinks.contains(event.target) && !menuToggle.contains(event.target)) {
             navLinks.classList.remove("active");
         }
+    });
+
+    document.querySelectorAll('.section').forEach(section => {
+        section.addEventListener('click', function () {
+            window.location.href = this.getAttribute('data-url');
+        });
     });
 });
         </script>
