@@ -326,44 +326,44 @@
     </footer>
 
 
-        <script> 
-
-document.addEventListener("DOMContentLoaded", function () {
+        <script> document.addEventListener("DOMContentLoaded", function () {
     const navLinks = document.querySelector(".nav-links");
     const menuToggle = document.querySelector(".menu-toggle");
     const links = document.querySelectorAll(".nav-links a");
-    const currentUrl = window.location.pathname.split("/").pop();
+    const currentUrl = window.location.pathname.split("/").pop().toLowerCase(); 
 
-    
+    // Zvýraznění aktivní stránky v navbaru
     links.forEach(link => {
-        if (link.getAttribute("href") === currentUrl) {
+        if (link.href.split("/").pop().toLowerCase() === currentUrl) {
             link.classList.add("active");
         }
     });
 
-   
+    // Funkce pro přepnutí mobilního menu
     function toggleMenu() {
         navLinks.classList.toggle("active");
     }
 
+    // Kliknutí na hamburger menu
     menuToggle.addEventListener("click", function (event) {
         toggleMenu();
-        event.stopPropagation(); 
+        event.stopPropagation();
     });
 
-  
+    // Kliknutí mimo menu ho zavře
     document.addEventListener("click", function (event) {
         if (!navLinks.contains(event.target) && !menuToggle.contains(event.target)) {
             navLinks.classList.remove("active");
         }
     });
-});
 
-            document.querySelectorAll('.section').forEach(section => {
-        section.addEventListener('click', function() {
+    // Klikací sekce (přesměrování)
+    document.querySelectorAll('.section').forEach(section => {
+        section.addEventListener('click', function () {
             window.location.href = this.getAttribute('data-url');
         });
     });
+});
         </script>
     </body>
 </html>
