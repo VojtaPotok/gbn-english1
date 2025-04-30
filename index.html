@@ -146,18 +146,18 @@
             
         }
        .banner {
-            height: 400px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-size: cover;
-            background-position: center;
-        }
-        .banner img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+  width: 100%;
+  height: 100vh; /* výška celé obrazovky, nebo si nastav jak chceš */
+  overflow: hidden;
+}
+
+.banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;     /* vyplní celý blok, ale nezdeformuje se */
+  object-position: center; /* ořezá ze stran rovnoměrně */
+  display: block;
+}
         p {
             margin-left: 10%;
             margin-right: 10%;
